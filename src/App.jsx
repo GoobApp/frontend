@@ -12,12 +12,20 @@ const App = () => {
   const chatInputRef = useRef(null);
 
   const addNewInput = (newMessage) => {
-        setMessages(messages.concat({ newMessage }))
+        if (messages.length < 200)
+        {
+          setMessages(messages.concat({ newMessage }))
+        }
+        else
+        {
+          let newMessages = messages.slice(1)
+          setMessages(newMessages.concat({ newMessage }))
+        }
     }
 
   const handleMessageSent = () => {
     const contentText = chatInputRef.current.getInputValueToSend();
-    if (contentText != '') {
+    if (contentText.trim() != '') {
       const tempProfilePic = "https://picsum.photos/512/512";
       addNewInput(createChatObject('John Smith', 0, tempProfilePic, contentText))
     }

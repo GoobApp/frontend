@@ -51,7 +51,7 @@ const ChatWindow = (props) => {
             }
         
         return (
-            <MessageObject key={message.newMessage.messageId} profilePicture={message.newMessage.userProfilePicture} displayName={message.newMessage.userDisplayName} content={message.newMessage.userContent} showAvatar={showAvatar}></MessageObject>
+            <MessageObject key={message.newMessage.messageId} profilePicture={message.newMessage.userProfilePicture} displayName={message.newMessage.userDisplayName} time={message.newMessage.messageTime.toLocaleString()} content={message.newMessage.userContent} showAvatar={showAvatar}></MessageObject>
         )})}
         </div>
     )

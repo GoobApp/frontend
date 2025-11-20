@@ -4,6 +4,7 @@ const createChatObject = (newUserDisplayName, newUserID, newUserProfilePicture, 
         userID: newUserID,
         userProfilePicture: newUserProfilePicture,
         userContent: newUserContent,
+        messageTime: new Date(),
         messageId: Date.now()
     }
 
