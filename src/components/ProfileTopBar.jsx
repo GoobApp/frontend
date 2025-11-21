@@ -1,20 +1,14 @@
 import '../App.css';
 
-const ProfileTopBar = () => {
+const ProfileTopBar = ({profile}) => {
     return (
         <div
         id='profileTopBar'
         className='profile-top-bar'
         >
-           <button>This button does nothing.</button>
-           <button>Nor does this one.</button>
-           <button>Or this one.</button>
-           <button>Or this one.</button>
-           <button>Or this one.</button>
-           <button>Or this one.</button>
-           <button>Or this one.</button>
-           <button>Or this one.</button>
-           <button>Or this one.</button>
+           <p className='{title-text}'>GoobApp</p>
+           <img className='profile-picture' src={profile.userProfilePicture} alt="Profile Picture"></img>
+
         </div>
     )
 }

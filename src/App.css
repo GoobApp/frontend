@@ -77,11 +77,13 @@ button:active {
 
 .wrapper {
   display: grid;
-  grid-template-columns: 1fr 6fr 2fr 1fr;
+  grid-template-columns: 2fr 6fr 2fr 2fr;
   grid-template-rows: max-content 10fr 1fr;
   height: 95vh;
   width: 95vw;
-  gap: 10px;
+  column-gap: 5%;
+  /* row-gap: 5%; */
+  
   margin-top:2.5vh;
   margin-bottom: 2.5vh;
   margin-left: 2.5vw;
@@ -101,7 +103,7 @@ button:active {
 
   grid-row: 2;
 
-  width: 95%;
+  /* width: 95%; */
   
   word-break: break-word;
   border-radius: 10px;
@@ -132,21 +134,24 @@ button:active {
 
   grid-row: 2;
 
-  width: 100%;
+  width: 95%;
+  height: 25%;
   
   word-break: break-word;
-  border-radius: 10px;
+  border-radius: 100px;
 
   display: flex;
   flex-direction: row;
-  align-items: start;
-  place-items: center;
-  overflow: auto;
-  gap: 25px;
+  align-items: center;
+  /* place-items: center; */
+  overflow: hidden;
 
   grid-column: 1 / span 4;
-  grid-row: 1
+  grid-row: 1;
+
+  gap: 2px
 }
+
 .chat-window {
   border-color: var(--secondary-color);
   background-color: var(--bg-color);
@@ -161,8 +166,7 @@ button:active {
   grid-column-end: 4;
   grid-row: 2;
 
-  width: 95%;
-  height: 95%;
+  width: 100%;
 
   border-radius: 10px;
 }
@@ -180,6 +184,8 @@ button:active {
 
   background-color: var(--primary-color);
 
+  margin-top: 1%;
+
   width: 95%;
   box-shadow: 0px 0px 0px var(--secondary-color);
   transition: box-shadow 0.25s ease-in-out;
@@ -196,6 +202,8 @@ button:active {
   height: 75px;
   border-radius: 100%;
 
+  margin-top: 5%;
+
   background-color: var(--primary-color);
 }
 
@@ -210,6 +218,7 @@ button:active {
   height: 75px;
   border-radius: 100%;
   
+  margin-top: 5%;
   background-color: var(--primary-color);
 }
 
@@ -227,6 +236,7 @@ button:active {
   margin-top: 25px;
 }
 
+.profile-picture,
 .chat-message-profile-picture {
   margin: 0;
   width: 50px;
@@ -234,8 +244,16 @@ button:active {
   background-color: gray;
   aspect-ratio: 1/1;
   border-radius: 100%;
+}
+
+.chat-message-profile-picture {
   grid-row: 2 / span 3;
   grid-column: 1;
+}
+
+.profile-picture {
+  justify-self: flex-end;
+  margin-left: auto;
 }
 
 .chat-message-display-name {

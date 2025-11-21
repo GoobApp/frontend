@@ -8,11 +8,13 @@ import SwitcherPanel from './components/SwitcherPanel';
 import createChatObject from './utils/ChatMessageObject';
 import ChatUsersPanel from './components/ChatUsersPanel';
 import ProfileTopBar from './components/ProfileTopBar';
+import createProfileObject from './utils/UserProfileObject';
 
 const App = () => {
   let [ messages, setMessages ] = useState([])
   const chatInputRef = useRef(null);
   const chatWindowRef = useRef(null);
+  const userProfilePicture = 'https://picsum.photos/512'
 
   const addNewInput = (newMessage) => {
         if (messages.length < 200)
@@ -30,15 +32,14 @@ const App = () => {
     const contentText = chatInputRef.current.getInputValueToSend();
     chatWindowRef.current.scrollToBottom();
     if (contentText.trim() != '') {
-      const tempProfilePic = "https://picsum.photos/512/512";
       chatWindowRef.current.scrollToBottom();
-      addNewInput(createChatObject('John Doe', 0, tempProfilePic, contentText))
+      addNewInput(createChatObject('John Doe', 0, userProfilePicture, contentText))
     }
   }
 
   return (
     <div className='wrapper'>
-      <ProfileTopBar></ProfileTopBar>
+      <ProfileTopBar profile={createProfileObject('John Doe', 0, userProfilePicture)}></ProfileTopBar>
       <SwitcherPanel></SwitcherPanel>
       <ChatWindow messages={messages} ref={chatWindowRef}></ChatWindow>
       <ChatExtrasButton></ChatExtrasButton>
