@@ -16,7 +16,7 @@ const App = () => {
   const [ messages, setMessages ] = useState<ChatMessageObject[]>([]);
   const chatInputRef = useRef<ChatInputRef>(null);
   const chatWindowRef = useRef<ChatWindowRef>(null);
-  const [ userProfilePicture, setUserProfilePicture] = useState<string>();
+  const [ userProfilePicture, setUserProfilePicture] = useState<string | null>(null);
   const [clientUserID, setClientUserID] = useState<number | null>(null);
   
   const [isConnected, setIsConnected] = useState<boolean>(socket.connected);
@@ -44,11 +44,16 @@ const App = () => {
     socket.on('disconnect', onDisconnect);
     socket.on('client receive message', clientReceiveMessage);
     socket.on('get user id', clientReceiveUserID)
+    socket.on('rate limited', () => { // TODO: maybe add a ui message not just an alert
+      console.error('Rate limit exceeded:');
+      alert(`Please stop spamming :D`);
+    });
 
     return () => {
       socket.off('connect', onConnect);
       socket.off('disconnect', onDisconnect);
       socket.off('client receive message', clientReceiveMessage);
+      socket.off('rate limited', clientReceiveMessage);
     };
   }, []);
 

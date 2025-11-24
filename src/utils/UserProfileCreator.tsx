@@ -3,7 +3,7 @@ import UserProfile from "../types/UserProfileObject";
 const createProfileObject = ({newUserDisplayName, newUserProfilePicture}
     : {
         newUserDisplayName: string,
-        newUserProfilePicture: string
+        newUserProfilePicture: string | null
     }
 ) => {
     let inputObject = {
