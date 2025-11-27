@@ -159,3 +159,7 @@
   height: 150px;
   background-color: rgba(128, 128, 128, 0);
 }
+
+.login-signup-panel-divider {
+  flex-basis: 100%;
+}

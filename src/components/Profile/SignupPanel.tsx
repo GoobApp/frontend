@@ -140,6 +140,7 @@ const SignupPanel = () => {
       >
         {signUpLoading ? "Loading..." : "Sign Up"}
       </button>
+      <hr className="login-signup-panel-divider"></hr>or
       <button type="button" onClick={() => handleSignUpWithProvider("google")}>
         Sign up with Google
       </button>
