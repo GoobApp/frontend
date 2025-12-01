@@ -171,37 +171,45 @@ const App = () => {
         {
           path: "/games/plat/*",
           element: (
-            <iframe
-              src="https://supkittymeow.github.io/plat"
-              className="fullscreen-game"
-            ></iframe>
+            <div className="iframe-wrapper">
+              <iframe
+                src="https://supkittymeow.github.io/plat"
+                className="fullscreen-game"
+              ></iframe>
+            </div>
           ),
         },
         {
           path: "/games/br2/*",
           element: (
-            <iframe
-              src="https://supkittymeow.github.io/br2"
-              className="fullscreen-game"
-            ></iframe>
+            <div className="iframe-wrapper">
+              <iframe
+                src="https://supkittymeow.github.io/br2"
+                className="fullscreen-game"
+              ></iframe>
+            </div>
           ),
         },
         {
           path: "/games/br3/*",
           element: (
-            <iframe
-              src="https://supkittymeow.github.io/super_secret_banana_run_3_build_thing"
-              className="fullscreen-game"
-            ></iframe>
+            <div className="iframe-wrapper">
+              <iframe
+                src="https://supkittymeow.github.io/super_secret_banana_run_3_build_thing"
+                className="fullscreen-game"
+              ></iframe>
+            </div>
           ),
         },
         {
           path: "/games/cfp/*",
           element: (
-            <iframe
-              src="https://supkittymeow.github.io/cfp"
-              className="fullscreen-game"
-            ></iframe>
+            <div className="iframe-wrapper">
+              <iframe
+                src="https://supkittymeow.github.io/cfp"
+                className="fullscreen-game"
+              ></iframe>
+            </div>
           ),
         },
       ],
