@@ -6,10 +6,12 @@ import {
 } from "react";
 import "../../App.css";
 import ChatMessageObject from "../../types/ChatMessageObject";
+import ChatInput from "./Input";
 import MessageDisplay from "./Message";
 
 type ChatWindowProps = {
   messages: ChatMessageObject[];
+  sendMessage: () => void;
 };
 
 type ChatWindowRef = {
@@ -32,6 +34,10 @@ const ChatWindow = forwardRef<ChatWindowRef, ChatWindowProps>((props, ref) => {
         top: el.scrollHeight,
         behavior: "smooth",
       });
+    },
+
+    sendMessage: () => {
+      props.sendMessage();
     },
   }));
 
@@ -99,6 +105,7 @@ const ChatWindow = forwardRef<ChatWindowRef, ChatWindowProps>((props, ref) => {
           ></MessageDisplay>
         );
       })}
+      <ChatInput onSend={props.sendMessage}></ChatInput>
     </div>
   );
 });

@@ -4,15 +4,12 @@
 
 import type { Session } from "@supabase/supabase-js";
 import { useEffect, useRef, useState } from "react";
-import { Route, Routes } from "react-router";
+import { createHashRouter, RouterProvider } from "react-router";
 import "./App.css";
-import ChatInput from "./components/Chat/Input";
-import ChatUsersPanel from "./components/Chat/UsersPanel";
 import ChatWindow from "./components/Chat/Window";
 import GamesList from "./components/GamesList";
-import TopBar from "./components/Profile/TopBar";
+import Layout from "./components/Layout";
 import { Client } from "./components/supabase/Client";
-import SwitcherPanel from "./components/SwitcherPanel";
 import { socket } from "./socket";
 import ChatInputRef from "./types/ChatInputRef";
 import ChatMessageObject from "./types/ChatMessageObject";
@@ -145,64 +142,78 @@ const App = () => {
     };
   }, []);
 
-  return (
-    <div className="wrapper">
-      <Routes>
-        <Route
-          path="/"
-          element={
-            <ChatWindow messages={messages} ref={chatWindowRef}></ChatWindow>
-          }
-        ></Route>
-        <Route path="/games/*" element={<GamesList></GamesList>}></Route>
-        <Route
-          path="/games/plat/*"
-          element={
+  const routes = [
+    {
+      path: "/",
+      element: (
+        <Layout
+          session={session}
+          profileObject={createProfileObject({
+            newUserDisplayName: username,
+            newUserProfilePicture: userProfilePicture,
+          })}
+        ></Layout>
+      ),
+      children: [
+        {
+          index: true,
+          element: (
+            <ChatWindow
+              messages={messages}
+              sendMessage={handleMessageSent}
+            ></ChatWindow>
+          ),
+        },
+        {
+          path: "/games/*",
+          element: <GamesList></GamesList>,
+        },
+        {
+          path: "/games/plat/*",
+          element: (
             <iframe
               src="https://supkittymeow.github.io/plat"
               className="fullscreen-game"
             ></iframe>
-          }
-        ></Route>
-        <Route
-          path="/games/br2/*"
-          element={
+          ),
+        },
+        {
+          path: "/games/br2/*",
+          element: (
             <iframe
               src="https://supkittymeow.github.io/br2"
               className="fullscreen-game"
             ></iframe>
-          }
-        ></Route>
-        <Route
-          path="/games/br3/*"
-          element={
+          ),
+        },
+        {
+          path: "/games/br3/*",
+          element: (
             <iframe
               src="https://supkittymeow.github.io/super_secret_banana_run_3_build_thing"
               className="fullscreen-game"
             ></iframe>
-          }
-        ></Route>
-        <Route
-          path="/games/cfp/*"
-          element={
+          ),
+        },
+        {
+          path: "/games/cfp/*",
+          element: (
             <iframe
               src="https://supkittymeow.github.io/cfp"
               className="fullscreen-game"
             ></iframe>
-          }
-        ></Route>
-      </Routes>
-      <TopBar
-        profile={createProfileObject({
-          newUserDisplayName: username,
-          newUserProfilePicture: userProfilePicture,
-        })}
-        session={session}
-      ></TopBar>
-      <SwitcherPanel></SwitcherPanel>
-      <ChatInput onSend={handleMessageSent} ref={chatInputRef}></ChatInput>
-      <ChatUsersPanel></ChatUsersPanel>
-    </div>
+          ),
+        },
+      ],
+    },
+  ];
+
+  const router = createHashRouter(routes);
+
+  return (
+    <main>
+      <RouterProvider router={router} />
+    </main>
   );
 };
 export default App;

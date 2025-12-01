@@ -1,38 +1,21 @@
 .chat-input-form {
-  grid-column-start: 1;
-  grid-column-end: 4;
-  grid-row: 3;
   gap: 25px;
   display: flex;
   width: 100%;
   height: 100%;
-  place-items: center;
-}
-
-.chat-input-char-limit {
-  position: absolute;
-
-  pointer-events: none;
-
-  color: gray;
-  z-index: 1;
-
-  width: 100%;
-
-  text-align: end;
-
-  margin-right: 10px;
-  margin-left: -10px;
+  align-items: end;
+  justify-items: center;
+  --input-size: 60px;
+  --max-input-size: 200px;
 }
 
 .chat-input-div {
   position: relative;
   display: flex;
-  align-items: center;
+  align-items: end;
   width: 100%;
-  height: min-content;
-  min-height: 100%;
-  max-height: 200%;
+  min-height: var(--input-size);
+  max-height: var(--max-input-size);
 }
 
 .chat-input {
@@ -53,8 +36,8 @@
   box-shadow: 0px 0px 0px var(--secondary-color);
   transition: box-shadow 0.25s ease-in-out;
 
-  min-height: 75px;
-  max-height: 200px;
+  min-height: var(--input-size);
+  max-height: var(--max-input-size);
 
   padding-left: 25px;
   padding-right: 100px;
@@ -65,21 +48,33 @@
 .chat-input-placeholder {
   position: absolute;
 
+  align-self: center;
   pointer-events: none;
 
-  font-family: Verdana, Geneva, Tahoma, sans-serif;
+  z-index: 1;
 
-  align-content: center;
-  font-size: 15px;
+  width: 100%;
 
-  scrollbar-width: none;
-  resize: none;
+  text-align: start;
 
   padding-left: 25px;
-  padding-right: 100px;
+}
 
-  flex-basis: 100%;
-  box-sizing: border-box;
+.chat-input-char-limit {
+  position: absolute;
+
+  align-self: center;
+  pointer-events: none;
+
+  color: gray;
+  z-index: 1;
+
+  width: 100%;
+
+  text-align: end;
+
+  margin-right: 10px;
+  margin-left: -10px;
 }
 
 .chat-send-button,
@@ -87,10 +82,10 @@
   align-self: end;
   font-size: 1rem;
 
-  min-width: 75px;
-  max-width: 75px;
-  min-height: 75px;
-  max-height: 75px;
+  min-width: var(--input-size);
+  max-width: var(--input-size);
+  min-height: var(--input-size);
+  max-height: var(--input-size);
   border-radius: 100%;
 
   background-color: var(--primary-color);

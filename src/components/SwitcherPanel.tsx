@@ -1,15 +1,21 @@
-import { Link } from "react-router";
+import { useNavigate } from "react-router";
 import "../App.css";
 const SwitcherPanel = () => {
+  const navigate = useNavigate();
   return (
     <div id="switcherPanelContainer" className="switcher-panel-container">
-      <Link to="/">
-        <button className="panel-button">Chat</button>
-      </Link>
-
-      <Link to="/games">
-        <button className="panel-button">Games</button>
-      </Link>
+      <button
+        className="panel-button"
+        onClick={() => navigate("/", { viewTransition: true })}
+      >
+        Chat
+      </button>
+      <button
+        className="panel-button"
+        onClick={() => navigate("/games", { viewTransition: true })}
+      >
+        Games
+      </button>
     </div>
   );
 };

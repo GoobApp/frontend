@@ -1,20 +1,35 @@
-import { Link } from "react-router";
+import { useNavigate } from "react-router";
 import "../App.css";
 const GamesList = () => {
+  const navigate = useNavigate();
+
   return (
     <div className={"games-list"}>
-      <Link to={"/games/plat"}>
-        <button className="games-list-button">Plat</button>
-      </Link>
-      <Link to={"/games/br2"}>
-        <button className="games-list-button">Banana Run 2</button>
-      </Link>
-      <Link to={"/games/br3"}>
-        <button className="games-list-button">Banana Run 3</button>
-      </Link>
-      <Link to={"/games/cfp"}>
-        <button className="games-list-button">Click For Points Web</button>
-      </Link>
+      <button
+        className="games-list-button"
+        onClick={() => navigate("/games/plat", { viewTransition: true })}
+      >
+        Plat
+      </button>
+      <button
+        className="games-list-button"
+        onClick={() => navigate("/games/br2", { viewTransition: true })}
+      >
+        Banana Run 2
+      </button>
+      <button
+        className="games-list-button"
+        onClick={() => navigate("/games/br3", { viewTransition: true })}
+      >
+        Banana Run 3
+      </button>
+
+      <button
+        className="games-list-button"
+        onClick={() => navigate("/games/cfp", { viewTransition: true })}
+      >
+        Click For Points Web
+      </button>
     </div>
   );
 };

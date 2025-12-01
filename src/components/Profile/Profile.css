@@ -21,7 +21,7 @@
 
   grid-column: 1 / span 3;
   justify-self: center;
-  width: 95%;
+  width: 100%;
 
   grid-row: 1;
 }
