@@ -175,6 +175,7 @@ const App = () => {
               <iframe
                 src="https://supkittymeow.github.io/plat"
                 className="fullscreen-game"
+                allow="fullscreen"
               ></iframe>
             </div>
           ),
@@ -186,6 +187,7 @@ const App = () => {
               <iframe
                 src="https://supkittymeow.github.io/br2"
                 className="fullscreen-game"
+                allow="fullscreen"
               ></iframe>
             </div>
           ),
@@ -197,6 +199,7 @@ const App = () => {
               <iframe
                 src="https://supkittymeow.github.io/super_secret_banana_run_3_build_thing"
                 className="fullscreen-game"
+                allow="fullscreen"
               ></iframe>
             </div>
           ),
@@ -208,6 +211,7 @@ const App = () => {
               <iframe
                 src="https://supkittymeow.github.io/cfp"
                 className="fullscreen-game"
+                allow="fullscreen"
               ></iframe>
             </div>
           ),
