@@ -5,13 +5,14 @@ import {
   useRef,
 } from "react";
 import "../../App.css";
+import ChatInputRef from "../../types/ChatInputRef";
 import ChatMessageObject from "../../types/ChatMessageObject";
 import ChatInput from "./Input";
 import MessageDisplay from "./Message";
 
 type ChatWindowProps = {
   messages: ChatMessageObject[];
-  sendMessage: () => void;
+  sendMessage: (contentText: string) => void;
 };
 
 type ChatWindowRef = {
@@ -20,6 +21,7 @@ type ChatWindowRef = {
 
 const ChatWindow = forwardRef<ChatWindowRef, ChatWindowProps>((props, ref) => {
   // Wrap the component with forwardRef so the parent can pass a ref;  useImperativeHandle exposes methods to that ref
+  const chatInputRef = useRef<ChatInputRef>(null);
   const scrollContainerRef = useRef<HTMLDivElement>(null);
   let wasAtBottom = useRef<boolean>(true);
 
@@ -35,11 +37,13 @@ const ChatWindow = forwardRef<ChatWindowRef, ChatWindowProps>((props, ref) => {
         behavior: "smooth",
       });
     },
-
-    sendMessage: () => {
-      props.sendMessage();
-    },
   }));
+
+  const handleSent = () => {
+    if (!chatInputRef) return;
+    const value = chatInputRef.current?.getInputValueToSend();
+    if (value) props.sendMessage(value);
+  };
 
   useLayoutEffect(() => {
     // Runs before the screen gets rendered but after the screen gets painted
@@ -105,7 +109,7 @@ const ChatWindow = forwardRef<ChatWindowRef, ChatWindowProps>((props, ref) => {
           ></MessageDisplay>
         );
       })}
-      <ChatInput onSend={props.sendMessage}></ChatInput>
+      <ChatInput onSend={handleSent} ref={chatInputRef}></ChatInput>
     </div>
   );
 });

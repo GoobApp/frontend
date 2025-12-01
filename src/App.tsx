@@ -7,7 +7,6 @@ import GamesList from "./components/GamesList";
 import Layout from "./components/Layout";
 import { Client } from "./components/supabase/Client";
 import { socket } from "./socket";
-import ChatInputRef from "./types/ChatInputRef";
 import ChatMessageObject from "./types/ChatMessageObject";
 import ChatWindowRef from "./types/ChatWindowRef";
 import createChatObject from "./utils/ChatMessageCreator";
@@ -15,7 +14,6 @@ import createProfileObject from "./utils/UserProfileCreator";
 
 const App = () => {
   const [messages, setMessages] = useState<ChatMessageObject[]>([]);
-  const chatInputRef = useRef<ChatInputRef>(null);
   const chatWindowRef = useRef<ChatWindowRef>(null);
   const [userProfilePicture, setUserProfilePicture] = useState<string | null>(
     null
@@ -82,12 +80,10 @@ const App = () => {
     );
   };
 
-  const handleMessageSent = () => {
-    if (!chatInputRef.current) return;
+  const handleMessageSent = (contentText: string) => {
     if (!clientUserID) return;
     if (!username) return;
 
-    const contentText: string = chatInputRef.current.getInputValueToSend();
     if (contentText.trim() != "") {
       // Make sure the content isn't blank!
       let message: ChatMessageObject = createChatObject({
