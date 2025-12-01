@@ -1,7 +1,3 @@
-// Source - https://stackoverflow.com/a
-// Posted by Lucas Andrade, modified by community. See post 'Timeline' for change history
-// Retrieved 2025-11-30, License - CC BY-SA 4.0
-
 import type { Session } from "@supabase/supabase-js";
 import { useEffect, useRef, useState } from "react";
 import { createHashRouter, RouterProvider } from "react-router";
@@ -50,18 +46,30 @@ const App = () => {
       addNewInput(value);
     };
 
-    socket.on("connect", onConnect);
-    socket.on("disconnect", onDisconnect);
-    socket.on("client receive message", clientReceiveMessage);
-    socket.on("rate limited", onRateLimited);
+    if (clientUserID && clientUserID !== "0") {
+      socket.on("connect", onConnect);
+      socket.on("disconnect", onDisconnect);
+      socket.on("client receive message", clientReceiveMessage);
+      socket.on("rate limited", onRateLimited);
+
+      if (!socket.connected) {
+        socket.connect();
+      }
+    } else {
+      console.log("Not logged in!");
+    }
 
     return () => {
       socket.off("connect", onConnect);
       socket.off("disconnect", onDisconnect);
       socket.off("client receive message", clientReceiveMessage);
       socket.off("rate limited", onRateLimited);
+
+      if (socket.connected) {
+        socket.disconnect();
+      }
     };
-  }, []);
+  }, [clientUserID]);
 
   useEffect(() => {}, [messages]);
 
