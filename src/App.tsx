@@ -97,6 +97,7 @@ const App = () => {
         newMessageContent: contentText,
       });
       socket.emit("message sent", message, session);
+      console.log("Sent message!");
       if (!chatWindowRef.current) return;
     }
   };
@@ -225,6 +226,10 @@ const App = () => {
           ),
         },
       ],
+    },
+    {
+      path: "*",
+      element: <h2>Loading...</h2>,
     },
   ];
 

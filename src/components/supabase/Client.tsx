@@ -1,4 +1,3 @@
-// Followed tutorial: https://mobisoftinfotech.com/resources/blog/app-development/supabase-react-typescript-tutorial
 import { createClient } from "@supabase/supabase-js";
 
 const supabaseUrl = "https://wfdcqaqihwsilzegcknq.supabase.co";
