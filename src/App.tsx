@@ -48,6 +48,7 @@ const App = () => {
     };
 
     const clientReceiveMessage = (value: ChatMessageObject) => {
+      setUnreadMessageCount(unreadMessageCount + 1)
       addNewInput(value);
     };
 
@@ -84,16 +85,18 @@ const App = () => {
     };
   }, [session, isAuthLoading]);
 
-  // useEffect(() => {
-  //   document.title =
-  //     unreadMessageCount == 0 ? "GoobApp" : `GoobApp (${unreadMessageCount})`;
-  // }, [unreadMessageCount]);
+  useEffect(() => {
+    document.title =
+      unreadMessageCount === 0 ? "GoobApp" : `GoobApp (${unreadMessageCount})`;
+  }, [unreadMessageCount]);
 
-  // useEffect(() => {
-  //   if (document.hasFocus()) {
-  //     setUnreadMessageCount(0);
-  //   }
-  // }, [document.hasFocus()]);
+  useEffect(() => {
+    window.addEventListener('focus', () => setUnreadMessageCount(0));
+
+    return () => {
+      window.removeEventListener('focus', () => setUnreadMessageCount(0));
+    };
+  }, []);
 
   const addNewInput = (
     newMessage: ChatMessageObject,
@@ -108,7 +111,6 @@ const App = () => {
           icon: img,
         }
       );
-      // setUnreadMessageCount(unreadMessageCount + 1);
     }
 
     newMessage.messageTime = new Date(newMessage.messageTime); // Websockets can't accept Dates, so they turn them into strings. This turns it back
