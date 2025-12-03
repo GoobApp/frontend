@@ -45,11 +45,18 @@ const App = () => {
       addNewInput(value);
     };
 
+    const onRecentMessagesRequestReceived = (value: ChatMessageObject[]) => {
+      value.forEach((element) => {
+        addNewInput(element);
+      });
+    };
+
     if (profile.userUUID && profile.userUUID !== "0") {
       socket.on("connect", onConnect);
       socket.on("disconnect", onDisconnect);
       socket.on("client receive message", clientReceiveMessage);
       socket.on("rate limited", onRateLimited);
+      socket.on("receive recent messages", onRecentMessagesRequestReceived);
 
       if (!socket.connected) {
         socket.connect();
@@ -63,6 +70,7 @@ const App = () => {
       socket.off("disconnect", onDisconnect);
       socket.off("client receive message", clientReceiveMessage);
       socket.off("rate limited", onRateLimited);
+      socket.off("receive recent messages", onRecentMessagesRequestReceived);
 
       if (socket.connected) {
         socket.disconnect();
@@ -115,6 +123,7 @@ const App = () => {
         newUserProfilePicture: profile.userProfilePicture,
         newMessageContent: contentText,
       });
+
       socket.emit("message sent", message, session);
     }
   };
@@ -142,6 +151,11 @@ const App = () => {
     );
   };
 
+  const retreiveRecentMessages = () => {
+    console.log("Retreiving previous messages...");
+    socket.emit("request recent messages");
+  };
+
   useEffect(() => {
     const { data: authListener } = Client.auth.onAuthStateChange(
       (_event, session: Session | null) => {
@@ -154,6 +168,7 @@ const App = () => {
             _event == "TOKEN_REFRESHED"
           ) {
             retreiveUserData(session);
+            retreiveRecentMessages();
           }
         } else {
           setSession(null);
