@@ -59,20 +59,9 @@ const PrivacyPolicy = () => {
       <h2>Third-parties</h2>
       <ul>
         <li>
-          As this website is hosted on GitHub pages, GitHub collects basic
-          information for internal purposes.{" "}
-          <a
-            href="https://github.com/github/docs/blob/main/content/site-policy/privacy-policies/github-general-privacy-statement.md"
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            Learn more
-          </a>
-        </li>
-        <li>
-          Additionally, GoobApp's domain (goobapp.org) is handled and proxied by
-          Cloudflare. While Cloudflare Analytics are turned off, they still
-          collect essential data.{" "}
+          Both GoobApp's domain (goobapp.org) and frontend hosting is handled by
+          Cloudflare and Cloudflare Pages respectively. While Cloudflare
+          Analytics are turned off, they still collect essential data.{" "}
           <a
             href="https://www.cloudflare.com/privacypolicy/"
             target="_blank"
