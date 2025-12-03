@@ -49,7 +49,7 @@ const App = () => {
     };
 
     const clientReceiveMessage = (value: ChatMessageObject) => {
-      setUnreadMessageCount(unreadMessageCount + 1)
+      setUnreadMessageCount(prevCount => prevCount + 1)
       addNewInput(value);
     };
 
