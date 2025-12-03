@@ -20,6 +20,7 @@ import EmptyPanel from "./components/Pages/EmptyPanel";
 const App = () => {
   const [session, setSession] = useState<Session | null>(null);
   const [unreadMessageCount, setUnreadMessageCount] = useState<number>(0);
+  const [isWindowFocused, setIsWindowFocused] = useState<boolean>(true);
   const [messages, setMessages] = useState<ChatMessageObject[]>([]);
   const [isConnected, setIsConnected] = useState<boolean>(socket.connected);
   const [isAuthLoading, setIsAuthLoading] = useState<boolean>(true);
@@ -49,7 +50,7 @@ const App = () => {
     };
 
     const clientReceiveMessage = (value: ChatMessageObject) => {
-      if (value.userUUID == profile.userUUID) {
+      if (value.userUUID == profile.userUUID && !isWindowFocused) {
         setUnreadMessageCount(prevCount => prevCount + 1)
       }
 
@@ -95,10 +96,22 @@ const App = () => {
   }, [unreadMessageCount]);
 
   useEffect(() => {
-    window.addEventListener('focus', () => setUnreadMessageCount(0));
+    window.addEventListener('focus', () => {
+      setUnreadMessageCount(0);
+      setIsWindowFocused(true);
+  });
+    window.addEventListener('blur', () => {
+      setIsWindowFocused(true);
+  });
 
     return () => {
-      window.removeEventListener('focus', () => setUnreadMessageCount(0));
+      window.removeEventListener('focus', () => {
+      setUnreadMessageCount(0);
+      setIsWindowFocused(true);
+  });
+      window.removeEventListener('blur', () => {
+          setIsWindowFocused(true);
+      });
     };
   }, []);
 
