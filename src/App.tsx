@@ -48,7 +48,7 @@ const App = () => {
 
     const onRecentMessagesRequestReceived = (value: ChatMessageObject[]) => {
       value.reverse().forEach((element) => {
-        addNewInput(element);
+        addNewInput(element, false);
       });
     };
 
@@ -90,8 +90,11 @@ const App = () => {
     }
   }, [document.hasFocus()]);
 
-  const addNewInput = (newMessage: ChatMessageObject) => {
-    if (!document.hasFocus()) {
+  const addNewInput = (
+    newMessage: ChatMessageObject,
+    shouldNotify: boolean = true
+  ) => {
+    if (!document.hasFocus() && shouldNotify) {
       const img = newMessage.userProfilePicture;
       const notification = new Notification(
         `New message from ${newMessage.userDisplayName}`,
@@ -119,7 +122,8 @@ const App = () => {
           newUserUUID: "0",
           newUserProfilePicture: null,
           newMessageContent: contentText,
-        })
+        }),
+        false
       );
     }
 
