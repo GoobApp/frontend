@@ -50,7 +50,7 @@ const App = () => {
     };
 
     const clientReceiveMessage = (value: ChatMessageObject) => {
-      if (value.userUUID == profile.userUUID && !isWindowFocused) {
+      if (value.userUUID != profile.userUUID && !isWindowFocused) {
         setUnreadMessageCount(prevCount => prevCount + 1)
       }
 
