@@ -50,7 +50,7 @@ const App = () => {
     };
 
     const clientReceiveMessage = (value: ChatMessageObject) => {
-      if (!isWindowFocused) {
+      if (value.userUUID != profile.userUUID && !isWindowFocused) {
         setUnreadMessageCount(prevCount => prevCount + 1)
       }
 
@@ -101,7 +101,7 @@ const App = () => {
       setIsWindowFocused(true);
   });
     window.addEventListener('blur', () => {
-      setIsWindowFocused(true);
+      setIsWindowFocused(false);
   });
 
     return () => {
@@ -110,7 +110,7 @@ const App = () => {
       setIsWindowFocused(true);
   });
       window.removeEventListener('blur', () => {
-          setIsWindowFocused(true);
+          setIsWindowFocused(false);
       });
     };
   }, []);
