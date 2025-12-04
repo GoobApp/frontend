@@ -7,6 +7,8 @@
   padding: 1em;
   word-break: break-word;
 
+  overflow: auto;
+
   grid-column-start: 2;
   grid-column-end: 3;
 

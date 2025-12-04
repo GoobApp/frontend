@@ -8,6 +8,7 @@ import "./SettingsPage.css";
 const SettingsPage = ({ profile }: { profile: UserProfile }) => {
   const handleUsernameChange = async (event: FormEvent) => {
     event.preventDefault();
+    if (!Client) return;
     const { data, error } = await Client.from("profiles")
       .update({ username: username })
       .eq("user_uuid", profile.userUUID);
@@ -25,6 +26,7 @@ const SettingsPage = ({ profile }: { profile: UserProfile }) => {
       return;
     }
 
+    if (!Client) return;
     const { data, error } = await Client.auth.updateUser({
       password: password,
     });
@@ -37,6 +39,7 @@ const SettingsPage = ({ profile }: { profile: UserProfile }) => {
 
   const handleProfilePictureChange = async (event: FormEvent) => {
     event.preventDefault();
+    if (!Client) return;
     const { data, error } = await Client.from("profiles")
       .update({ profile_image_url: profileUrl })
       .eq("user_uuid", profile.userUUID);
