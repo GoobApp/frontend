@@ -2,6 +2,7 @@ import type { Session } from "@supabase/supabase-js";
 import { useEffect, useState } from "react";
 import { createBrowserRouter, RouterProvider } from "react-router";
 import "./App.css";
+import MiniWindow from "./components/Chat/MiniWindow";
 import ChatWindow from "./components/Chat/Window";
 import Layout from "./components/Layout";
 import ChatLoggedOutWindow from "./components/Pages/ChatLoggedOutWindow";
@@ -223,14 +224,6 @@ const App = () => {
     };
   }, []);
 
-  const chatWindow = (
-    <ChatWindow
-      messages={messages}
-      sendMessage={handleMessageSent}
-      clientUserUUID={profile.userUUID}
-    ></ChatWindow>
-  );
-
   const routes = [
     {
       path: "/",
@@ -239,11 +232,15 @@ const App = () => {
           session={session}
           profileObject={profile}
           chatWindow={
-            <ChatWindow
-              messages={messages}
-              sendMessage={handleMessageSent}
-              clientUserUUID={profile.userUUID}
-            ></ChatWindow>
+            isAuthLoading || session == null ? (
+              <div className="chat-users-panel-container"></div>
+            ) : (
+              <MiniWindow
+                messages={messages}
+                sendMessage={handleMessageSent}
+                clientUserUUID={profile.userUUID}
+              ></MiniWindow>
+            )
           }
         ></Layout>
       ),

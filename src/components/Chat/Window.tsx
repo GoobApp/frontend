@@ -87,7 +87,12 @@ const ChatWindow = forwardRef<ChatWindowRef, ChatWindowProps>((props, ref) => {
             showSpacer = false;
           } else {
             let prev = props.messages[index - 1];
-            if (prev.userUUID !== message.userUUID || Math.abs(prev.messageTime.getMinutes() - message.messageTime.getMinutes()) > 2) {
+            if (
+              prev.userUUID !== message.userUUID ||
+              Math.abs(
+                prev.messageTime.getMinutes() - message.messageTime.getMinutes()
+              ) > 2
+            ) {
               showAvatar = true;
               showSpacer = true;
             }
@@ -117,6 +122,5 @@ const ChatWindow = forwardRef<ChatWindowRef, ChatWindowProps>((props, ref) => {
     </div>
   );
 });
-ChatWindow.displayName = "ChatWindow";
 
 export default ChatWindow;

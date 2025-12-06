@@ -6,6 +6,7 @@
   justify-items: center;
   --input-size: 60px;
   --max-input-size: 200px;
+  width: 100%;
 }
 
 .chat-input-div {

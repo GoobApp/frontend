@@ -111,6 +111,28 @@ body {
   flex-direction: column;
 }
 
+.chat-mini-window {
+  border-color: var(--secondary-color);
+  background-color: var(--bg-color);
+  border-width: 2px;
+  border-style: solid;
+  padding: 1em;
+
+  grid-column: 3;
+  grid-row: 2;
+
+  width: 100%;
+
+  width: 100%;
+
+  justify-self: center;
+
+  word-break: break-word;
+
+  display: grid;
+  grid-template-rows: 1fr min-content;
+}
+
 @media screen and (max-width: 1000px) {
   .chat-users-panel-container,
   .switcher-panel-container {
