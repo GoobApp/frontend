@@ -3,7 +3,6 @@ import "../../App.css";
 import ChatInputRef from "../../types/ChatInputRef";
 import ChatMessageObject from "../../types/ChatMessageObject";
 import ChatInput from "./Input";
-import MessageDisplay from "./Message";
 import Messages from "./Messages";
 
 type ChatWindowProps = {
@@ -12,16 +11,19 @@ type ChatWindowProps = {
   clientUserUUID: string;
 };
 
-type ChatWindowRef = {
+type MessagesRef = {
   scrollToBottom: () => void;
 };
 
-const MiniWindow = forwardRef<ChatWindowRef, ChatWindowProps>((props, ref) => {
+const MiniWindow = forwardRef<MessagesRef, ChatWindowProps>((props, ref) => {
   // Wrap the component with forwardRef so the parent can pass a ref;  useImperativeHandle exposes methods to that ref
   const chatInputRef = useRef<ChatInputRef>(null);
+  const messagesRef = useRef<MessagesRef>(null);
+  
   const handleSent = () => {
     if (!chatInputRef) return;
     const value = chatInputRef.current?.getInputValueToSend();
+    messagesRef.current?.scrollToBottom();
     if (value) props.sendMessage(value);
   };
 
@@ -30,7 +32,7 @@ const MiniWindow = forwardRef<ChatWindowRef, ChatWindowProps>((props, ref) => {
       <Messages messages={props.messages}
                 sendMessage={props.sendMessage}
                 clientUserUUID={props.clientUserUUID}
-                ref={}
+                ref={messagesRef}
                 ></Messages>
       <ChatInput onSend={handleSent} ref={chatInputRef}></ChatInput>
     </div>

@@ -1,4 +1,4 @@
-import { forwardRef, useEffect, useLayoutEffect, useRef } from "react";
+import { forwardRef, useEffect, useImperativeHandle, useLayoutEffect, useRef } from "react";
 import "../../App.css";
 import ChatInputRef from "../../types/ChatInputRef";
 import ChatMessageObject from "../../types/ChatMessageObject";
@@ -21,11 +21,17 @@ const Messages = forwardRef<ChatWindowRef, ChatWindowProps>((props, ref) => {
   const scrollContainerRef = useRef<HTMLDivElement>(null);
   let wasAtBottom = useRef<boolean>(true);
 
+  useImperativeHandle(ref, () => ({
+    scrollToBottom: () => {
+       scrollToBottom();
+    },
+  }), [])
+
   const handleSent = () => {
-    if (!chatInputRef) return;
-    const value = chatInputRef.current?.getInputValueToSend();
-    if (value) props.sendMessage(value);
-  };
+      if (!chatInputRef) return;
+      const value = chatInputRef.current?.getInputValueToSend();
+      if (value) props.sendMessage(value);
+  }
 
   useLayoutEffect(() => {
     // Runs before the screen gets rendered but after the screen gets painted
