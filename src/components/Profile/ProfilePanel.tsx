@@ -18,6 +18,7 @@ const ProfilePanel = ({ profile }: { profile: UserProfileObject }) => {
     try {
       setError(null);
       setIsLoggingOut(true);
+      if (!Client) return;
       const { error } = await Client.auth.signOut();
       if (error) throw error;
       window.location.reload();

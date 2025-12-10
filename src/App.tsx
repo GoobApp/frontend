@@ -278,6 +278,10 @@ const App = () => {
           element: <PrivacyPolicy></PrivacyPolicy>,
         },
         {
+          path: "/dev/logout",
+          element: <ChatLoggedOutWindow></ChatLoggedOutWindow>,
+        },
+        {
           path: "/games/*",
           element: <GamesList></GamesList>,
         },

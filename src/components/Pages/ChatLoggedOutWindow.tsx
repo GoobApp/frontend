@@ -1,4 +1,5 @@
 import "./Other.css";
+import goober from "../../assets/images/goofy_goober.png";
 
 const ChatLoggedOutWindow = () => {
   return (
@@ -25,7 +26,7 @@ const ChatLoggedOutWindow = () => {
         </button>
       </a>
 
-      <img src="/goofy_goober.png" className="goofy-goober"></img>
+      <img src={goober} className="goofy-goober"></img>
     </div>
   );
 };

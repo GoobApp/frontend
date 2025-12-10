@@ -1,6 +1,13 @@
 import "../../App.css";
 import "./Message.css";
-// Is this the worst code i've ever written? I would care but if it works it works
+import goob from "../../assets/images/goofy_goober.png";
+import cfp_button from "../../assets/images/emojis/cfp/button.png";
+import cfp_clicked from "../../assets/images/emojis/cfp/clicked.png";
+
+interface EmojiDict {
+  [key: string]: string; // Keys are strings, values are strings
+}
+
 const MessageDisplay = ({
   userID,
   displayName,
@@ -18,6 +25,36 @@ const MessageDisplay = ({
   showAvatar: boolean;
   showSpacer: boolean;
 }) => {
+  const emojis: EmojiDict = {
+    "goob": goob,
+    "cfp_button": cfp_button,
+    "cfp_clicked": cfp_clicked,
+  }
+
+  const splitContent = content.split(/(:[^:]+:)/);
+  const styledContent = splitContent.map((item) => {
+    if (item[0] === ":" && item[item.length - 1] === ":")
+    {
+      const emojiName = item.slice(1, item.length - 1)
+      if(emojiName in emojis) {
+        if (item === content)
+        {
+          return <img key={item} className="chat-message-content-emoji-big" src={emojis[emojiName]}></img>
+        }
+
+        return <img key={item} className="chat-message-content-emoji" src={emojis[emojiName]}></img>
+      }
+      else
+      {
+        return <div className="chat-message-content-text">{item}</div>
+      }
+    }
+    else
+    {
+      return <div className="chat-message-content-text">{item}</div>
+    }
+  })
+  
   return (
     <div
       className={
@@ -42,9 +79,9 @@ const MessageDisplay = ({
       )}
       {showAvatar ? <p className="chat-message-time">{time}</p> : <></>}
       {showAvatar ? (
-        <pre className="chat-message-content">{content}</pre>
+        <pre className="chat-message-content">{styledContent}</pre>
       ) : (
-        <pre className="chat-message-content-no-avatar">{content}</pre>
+        <pre className="chat-message-content-no-avatar">{styledContent}</pre>
       )}
     </div>
   );

@@ -56,6 +56,25 @@
   white-space: pre-wrap;
   overflow-wrap: break-word;
   font-family: Verdana, Geneva, Tahoma, sans-serif;
+  display: block;
+}
+
+.chat-message-content-emoji {
+  height: 2em;
+  width: auto;
+  display: inline-block;
+  white-space: nowrap;
+}
+
+.chat-message-content-emoji-big {
+  height: 3em;
+  width: auto;
+  display: inline-block;
+  white-space: nowrap;
+}
+
+.chat-message-content-text {
+  display: inline-block;
 }
 
 .chat-message-content-no-avatar {

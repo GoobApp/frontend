@@ -2,7 +2,6 @@ import { forwardRef, useEffect, useImperativeHandle, useLayoutEffect, useRef } f
 import "../../App.css";
 import ChatInputRef from "../../types/ChatInputRef";
 import ChatMessageObject from "../../types/ChatMessageObject";
-import ChatInput from "./Input";
 import MessageDisplay from "./Message";
 
 type ChatWindowProps = {
