@@ -60,7 +60,7 @@
 }
 
 .chat-message-content-emoji {
-  height: 2em;
+  height: 1em;
   width: auto;
   display: inline-block;
   white-space: nowrap;
