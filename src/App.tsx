@@ -92,23 +92,22 @@ const App = () => {
       unreadMessageCount === 0 ? "GoobApp" : `GoobApp (${unreadMessageCount})`;
   }, [unreadMessageCount]);
 
+  const onBlur = () => {
+    setIsWindowFocused(false);
+  };
+
+  const onFocus = () => {
+    setUnreadMessageCount(0);
+    setIsWindowFocused(true);
+  };
+
   useEffect(() => {
-    window.addEventListener("focus", () => {
-      setUnreadMessageCount(0);
-      setIsWindowFocused(true);
-    });
-    window.addEventListener("blur", () => {
-      setIsWindowFocused(false);
-    });
+    window.addEventListener("focus", onFocus);
+    window.addEventListener("blur", onBlur);
 
     return () => {
-      window.removeEventListener("focus", () => {
-        setUnreadMessageCount(0);
-        setIsWindowFocused(true);
-      });
-      window.removeEventListener("blur", () => {
-        setIsWindowFocused(false);
-      });
+      window.removeEventListener("focus", onFocus);
+      window.removeEventListener("blur", onBlur);
     };
   }, []);
 
@@ -118,7 +117,7 @@ const App = () => {
   ) => {
     if (newMessage.userUUID != profile.userUUID && !isWindowFocused) {
       setUnreadMessageCount((prevCount) => prevCount + 1);
-      if (shouldNotify) {
+      if (shouldNotify && "Notification" in window) {
         const img = newMessage.userProfilePicture;
         const notification = new Notification(
           `New message from ${newMessage.userDisplayName}`,
