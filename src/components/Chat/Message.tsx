@@ -54,10 +54,18 @@ const MessageDisplay = ({
           ></img>
         );
       } else {
-        return <div className="chat-message-content-text">{item}</div>;
+        return (
+          <div className="chat-message-content-text" key={item}>
+            {item}
+          </div>
+        );
       }
     } else {
-      return <div className="chat-message-content-text">{item}</div>;
+      return (
+        <div className="chat-message-content-text" key={item}>
+          {item}
+        </div>
+      );
     }
   });
 
