@@ -96,27 +96,29 @@ const App = () => {
 
     const onAddActiveUser = (value: UserProfile) => {
       console.log("New user joined!");
-      const newActiveUsers = { ...activeUsers };
+      const newActiveUsers = activeUsers.slice();
+
       newActiveUsers.forEach((element, index) => {
         if (element.userUUID == value.userUUID) {
-          activeUsers[index] = value;
+          newActiveUsers[index] = value;
           return;
         }
       });
+      newActiveUsers.push(value);
 
-      activeUsers.push(value);
+      setActiveUsers(newActiveUsers);
     };
 
     const onRemoveActiveUser = (value: UserProfile) => {
       console.log("User left :(");
-      const newActiveUsers = { ...activeUsers };
+      const newActiveUsers = activeUsers.slice();
+
       newActiveUsers.forEach((element, index) => {
         if (element.userUUID == value.userUUID) {
-          delete activeUsers[index];
+          delete newActiveUsers[index];
+          setActiveUsers(newActiveUsers);
         }
       });
-
-      setActiveUsers(newActiveUsers);
     };
 
     if (!isAuthLoading && session) {
@@ -141,6 +143,8 @@ const App = () => {
       socket.off("client receive message", clientReceiveMessage);
       socket.off("rate limited", onRateLimited);
       socket.off("receive recent messages", onRecentMessagesRequestReceived);
+      socket.off("new active user", onAddActiveUser);
+      socket.off("remove active user", onRemoveActiveUser);
 
       if (socket.connected) {
         socket.disconnect();
