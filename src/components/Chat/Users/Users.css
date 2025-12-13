@@ -7,6 +7,8 @@
   padding: 5px;
   width: 80%;
   place-self: center;
+  align-items: center;
+  gap: 10px;
   /* border-radius: 0; */
   /* border-top: 1px solid black; */
 }
