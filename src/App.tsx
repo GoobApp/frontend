@@ -42,7 +42,9 @@ const App = () => {
       console.log("Connected!");
       setIsConnected(true);
 
-      socket.emit("add to active users list", profile);
+      if (profile) {
+        socket.emit("add to active users list", profile);
+      }
     };
 
     const onDisconnect = () => {
