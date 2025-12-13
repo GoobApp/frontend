@@ -77,17 +77,13 @@ const App = () => {
       value: ChatMessageObject[],
       users: UserProfile[]
     ) => {
-      console.log("Receiving recent users and messages...");
-      console.log(value);
-      console.log(users);
+      value.reverse().forEach((element) => {
+        addNewInput(element);
+      });
 
       if (users) {
         setActiveUsers(users);
       }
-
-      value.reverse().forEach((element) => {
-        addNewInput(element);
-      });
     };
 
     const onAddActiveUser = (value: UserProfile) => {
@@ -216,16 +212,15 @@ const App = () => {
       return;
     }
 
-    setProfile(
-      createProfileObject({
-        newUserDisplayName: data.username,
-        newUserProfilePicture: data.profile_image_url,
-        newUserID: data.user_id,
-        newUserUUID: session.user.id,
-      })
-    );
+    const newProfile = createProfileObject({
+      newUserDisplayName: data.username,
+      newUserProfilePicture: data.profile_image_url,
+      newUserID: data.user_id,
+      newUserUUID: session.user.id,
+    });
 
-    socket.emit("add to active users list", data);
+    setProfile(newProfile);
+    socket.emit("add to active users list", newProfile);
   };
 
   const retrieveRecentMessages = () => {
