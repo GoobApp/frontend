@@ -42,8 +42,9 @@ const App = () => {
       console.log("Connected!");
       setIsConnected(true);
 
-      if (profile.userUUID != null)
-        socket.emit("add to active users list", profile);
+      if (profile.userUUID != null) {
+        retrieveActiveUsers();
+      }
     };
 
     const onDisconnect = () => {
@@ -76,14 +77,13 @@ const App = () => {
       }
     };
 
-    const onRecentMessagesRequestReceived = (
-      value: ChatMessageObject[],
-      users: UserProfile[]
-    ) => {
+    const onRecentMessagesRequestReceived = (value: ChatMessageObject[]) => {
       value.reverse().forEach((element) => {
         addNewInput(element);
       });
+    };
 
+    const onActiveUsersRequestReceived = (users: UserProfile[]) => {
       if (users) {
         setActiveUsers(users);
       }
@@ -123,6 +123,7 @@ const App = () => {
       socket.on("client receive message", clientReceiveMessage);
       socket.on("rate limited", onRateLimited);
       socket.on("receive recent messages", onRecentMessagesRequestReceived);
+      socket.on("receive active users", onActiveUsersRequestReceived);
       socket.on("new active user", onAddActiveUser);
       socket.on("remove active user", onRemoveActiveUser);
 
@@ -139,6 +140,7 @@ const App = () => {
       socket.off("client receive message", clientReceiveMessage);
       socket.off("rate limited", onRateLimited);
       socket.off("receive recent messages", onRecentMessagesRequestReceived);
+      socket.off("receive active users", onActiveUsersRequestReceived);
       socket.off("new active user", onAddActiveUser);
       socket.off("remove active user", onRemoveActiveUser);
 
@@ -229,6 +231,11 @@ const App = () => {
   const retrieveRecentMessages = () => {
     console.log("Retrieving previous messages...");
     socket.emit("request recent messages");
+  };
+
+  const retrieveActiveUsers = () => {
+    console.log("Retrieving active users...");
+    socket.emit("request active users");
   };
 
   useEffect(() => {
