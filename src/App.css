@@ -9,7 +9,9 @@ body {
   grid-template-columns: 1fr 5fr 1.5fr;
   grid-template-rows: 1fr 15fr min-content;
   width: 100vw;
-  height: 100vh;
+  height: 98vh;
+  margin: 0;
+  padding: 0;
 }
 
 .chat-users-panel-container,

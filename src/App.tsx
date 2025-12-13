@@ -58,6 +58,7 @@ const App = () => {
     };
 
     const clientReceiveMessage = (value: ChatMessageObject) => {
+      console.log("Message received!");
       addNewInput(value);
 
       if (session?.user.id == value.userUUID || document.hasFocus()) return;
@@ -80,7 +81,10 @@ const App = () => {
       value: ChatMessageObject[],
       users: UserProfile[]
     ) => {
-      console.log(users);
+      console.log("Receiving recent users and messages...");
+      console.log("Recent messages: " + value);
+      console.log("Recent users: " + users);
+
       if (users) {
         setActiveUsers(users);
       }
@@ -91,6 +95,7 @@ const App = () => {
     };
 
     const onAddActiveUser = (value: UserProfile) => {
+      console.log("New user joined!");
       const newActiveUsers = { ...activeUsers };
       newActiveUsers.forEach((element, index) => {
         if (element.userUUID == value.userUUID) {
@@ -103,6 +108,7 @@ const App = () => {
     };
 
     const onRemoveActiveUser = (value: UserProfile) => {
+      console.log("User left :(");
       const newActiveUsers = { ...activeUsers };
       newActiveUsers.forEach((element, index) => {
         if (element.userUUID == value.userUUID) {
