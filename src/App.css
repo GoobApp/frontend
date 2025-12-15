@@ -6,7 +6,6 @@
 
 body {
   display: flex;
-  align-items: center;
   justify-content: center;
   overflow-x: hidden;
   margin: 0;
@@ -20,7 +19,7 @@ body {
 .wrapper {
   display: grid;
   grid-template-columns: 1fr 5fr 1.5fr;
-  grid-template-rows: 1fr 15fr min-content;
+  grid-template-rows: min-content 15fr min-content;
 
   width: 100dvw;
   height: 98dvh;
