@@ -4,16 +4,21 @@
   box-sizing: border-box;
 }
 
+html, body {
+  overflow: hidden;
+  height: 100%
+}
+
 body {
   display: flex;
   justify-content: center;
-  overflow-x: hidden;
   margin: 0;
   padding: 0;
 
-  overflow-y: hidden;
+  overflow: hidden;
 
-  max-width: 100vw;
+  max-width: 100dvw;
+  min-height: 0:
 }
 
 .wrapper {
@@ -22,7 +27,9 @@ body {
   grid-template-rows: min-content 15fr min-content;
 
   width: 100dvw;
-  height: 98dvh;
+  height: 100dvh;
+  
+  min-height: 0;
 
   overflow-y: hidden;
 }
@@ -105,13 +112,15 @@ body {
 
   display: grid;
   grid-template-rows: 1fr min-content;
+  
+  min-height: 0;
 }
 
 .chat-messages {
   background-color: var(--bg-dark);
   border-radius: 18px;
   overflow-x: hidden;
-  overflow-y: scroll;
+  overflow-y: auto;
 
   font-size: 1rem;
 
@@ -121,6 +130,8 @@ body {
 
   display: flex;
   flex-direction: column;
+  
+  min-height: 0;
 }
 
 .chat-mini-window {
