@@ -100,15 +100,16 @@ const App = () => {
 
       setActiveUsers((prevActiveUsers) => {
         const newActiveUsers = prevActiveUsers.slice();
+        const index = newActiveUsers.findIndex(
+          (e) => e.userUUID === value.userUUID
+        );
 
-        newActiveUsers.forEach((element, index) => {
-          if (element.userUUID == value.userUUID) {
-            newActiveUsers[index] = value;
-            return newActiveUsers;
-          }
-        });
+        if (index != -1) {
+          newActiveUsers[index] = value;
+        } else {
+          newActiveUsers.push(value);
+        }
 
-        newActiveUsers.push(value);
         return newActiveUsers;
       });
     };
@@ -124,22 +125,26 @@ const App = () => {
     };
 
     const onMessageEdited = (messageId: number, messageContent: string) => {
-      const messageIndex = messages.findIndex(
-        (event) => event.messageId == messageId
-      );
-      if (messageIndex != -1) {
-        let newMessages = messages.slice();
+      setMessages((prevMessages) => {
+        const messageIndex = prevMessages.findIndex(
+          (event) => event.messageId == messageId
+        );
+        if (messageIndex != -1) {
+          const newMessages = prevMessages.slice();
+          newMessages[messageIndex] = createChatObject({
+            newUserDisplayName: prevMessages[messageIndex].userDisplayName,
+            newMessageContent: messageContent,
+            newUserProfilePicture:
+              prevMessages[messageIndex].userProfilePicture,
+            newUserUUID: prevMessages[messageIndex].userUUID,
+            newIsEdited: true,
+          });
 
-        newMessages[messageIndex] = createChatObject({
-          newUserDisplayName: messages[messageIndex].userDisplayName,
-          newMessageContent: messageContent,
-          newUserProfilePicture: messages[messageIndex].userProfilePicture,
-          newUserUUID: messages[messageIndex].userUUID,
-          newIsEdited: true,
-        });
-
-        setMessages(newMessages);
-      }
+          return newMessages;
+        } else {
+          return prevMessages;
+        }
+      });
     };
 
     if ((!isAuthLoading && session) || !import.meta.env.PROD) {
@@ -176,7 +181,7 @@ const App = () => {
         socket.disconnect();
       }
     };
-  }, [session, isAuthLoading, profile]);
+  }, [session, isAuthLoading]);
 
   useEffect(() => {
     document.title =
