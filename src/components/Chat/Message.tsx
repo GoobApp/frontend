@@ -163,11 +163,11 @@ const MessageDisplay = ({
                   : undefined,
               timeStyle: "short",
             })}
-            {message.isEdited && " (edited)"}
           </p>
         )}
         <pre className="chat-message-content" ref={contentRef}>
           {styledContent}
+          {message.isEdited && <p className="chat-message-edited"> (edited)</p>}
         </pre>
       </div>
 

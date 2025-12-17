@@ -58,6 +58,13 @@
   font-style: italic;
 }
 
+.chat-message-edited {
+  font-size: 50%;
+  align-self: center;
+  font-style: italic;
+  display: inline;
+}
+
 .chat-message-content-emoji {
   height: 1em;
   width: auto;
@@ -90,7 +97,7 @@
   white-space: pre-wrap;
   overflow-wrap: break-word;
   font-family: Verdana, Geneva, Tahoma, sans-serif;
-  display: block;
+  display: inline-block;
 }
 
 .chat-message-container-container-hover,
