@@ -217,15 +217,15 @@ const App = () => {
     if (!import.meta.env.PROD && !session?.user.id) {
       let input = createChatObject({
         newUserDisplayName: "Test User",
-        newUserUUID: "1",
+        newUserUUID: Date.now().toString(),
         newUserProfilePicture: null,
         newMessageContent: contentText,
         newIsEdited: false,
       });
 
-      addNewInput(input);
+      // addNewInput(input);
 
-      // socket.emit("message sent", input);
+      socket.emit("message sent", input);
       return;
     }
 

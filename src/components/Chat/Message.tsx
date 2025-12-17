@@ -102,7 +102,6 @@ const MessageDisplay = ({
     const ref = contentRef.current;
     if (!ref) return;
     socket.emit("edit message", message.messageId, ref.innerText);
-    ref.innerText = message.messageContent;
     ref.contentEditable = "false";
     setIsEditing(false);
   };
@@ -183,7 +182,7 @@ const MessageDisplay = ({
       )}
       {!isEditing && showHover && (
         <div className="hover-div">
-          {profileUUID == message.userUUID && (
+          {(profileUUID == message.userUUID || !import.meta.env.PROD) && (
             <button className="hover-button" onClick={editClicked}>
               Edit
             </button>
