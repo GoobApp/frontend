@@ -217,9 +217,9 @@ const App = () => {
         newIsEdited: false,
       });
 
-      // addNewInput(input);
+      addNewInput(input);
 
-      socket.emit("message sent", input);
+      // socket.emit("message sent", input);
       return;
     }
 
@@ -344,8 +344,7 @@ const App = () => {
               <MiniWindow
                 messages={messages}
                 sendMessage={handleMessageSent}
-                clientUserUUID={profile.userUUID}
-                profileUUID={profile.userUUID}
+                clientProfile={profile}
               ></MiniWindow>
             )
           }
@@ -361,7 +360,7 @@ const App = () => {
             <ChatWindow
               messages={messages}
               sendMessage={handleMessageSent}
-              profileUUID={profile.userUUID}
+              clientProfile={profile}
             ></ChatWindow>
           ) : (
             <ChatLoggedOutWindow></ChatLoggedOutWindow>

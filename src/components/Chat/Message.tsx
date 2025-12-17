@@ -6,6 +6,7 @@ import goob from "../../assets/images/goofy_goober.png";
 import { socket } from "../../socket";
 import ChatMessage from "../../types/ChatMessageObject";
 import "./Message.css";
+import UserProfile from "../../types/UserProfileObject";
 
 interface EmojiDict {
   [key: string]: string; // Keys are strings, values are strings
@@ -15,12 +16,12 @@ const MessageDisplay = ({
   message,
   showAvatar,
   showSpacer,
-  profileUUID,
+  clientProfile,
 }: {
   message: ChatMessage;
   showAvatar: boolean;
   showSpacer: boolean;
-  profileUUID: string;
+  clientProfile: UserProfile;
 }) => {
   const [showHover, setShowHover] = useState(false);
   const [isEditing, setIsEditing] = useState(false);
@@ -94,7 +95,7 @@ const MessageDisplay = ({
       "Are you sure you want to delete this message?"
     );
     if (shouldDelete) {
-      console.warn("Delete not implemented!");
+      socket.emit("delete message", message.messageId);
     }
   };
 
@@ -184,8 +185,8 @@ const MessageDisplay = ({
       )}
       {!isEditing && showHover && (
         <div className="hover-div">
-          {((profileUUID == message.userUUID && message.messageId != null) ||
-            !import.meta.env.PROD) && (
+          {((clientProfile.userUUID == message.userUUID && message.messageId != null) ||
+            !import.meta.env.PROD || clientProfile.userRole == "Owner") && (
             <button className="hover-button" onClick={editClicked}>
               Edit
             </button>
@@ -193,9 +194,15 @@ const MessageDisplay = ({
           {/* <button className="hover-button" onClick={replyClicked}>
             Reply
           </button>
+          */}
+
+        {((clientProfile.userUUID == message.userUUID && message.messageId != null) ||
+            !import.meta.env.PROD || clientProfile.userRole == "Owner") && (
           <button className="hover-button" onClick={deleteClicked}>
             Delete
-          </button> */}
+          </button>
+        )}
+
         </div>
       )}
     </div>
