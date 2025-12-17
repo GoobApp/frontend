@@ -33,6 +33,7 @@ const App: FC<LayoutProps> = ({
         <ChatUsersPanel
           activeUsers={usersList}
           maxUsers={maxUsers}
+          clientUser={profileObject}
         ></ChatUsersPanel>
       ) : (
         chatWindow
