@@ -10,6 +10,8 @@
   text-rendering: optimizeLegibility;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
+
+  overscroll-behavior-y: none;
 }
 
 ::-webkit-scrollbar {
@@ -143,9 +145,6 @@ button:focus-visible {
 }
 
 :root {
-  /*
-  --secondary-color: rgb(144, 151, 84); 
-  --text-color: white; */
   --roundness: 8px;
 }
 

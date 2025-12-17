@@ -1,9 +1,8 @@
-import { forwardRef, useEffect, useLayoutEffect, useRef } from "react";
+import { forwardRef, useRef } from "react";
 import "../../App.css";
 import ChatInputRef from "../../types/ChatInputRef";
 import ChatMessageObject from "../../types/ChatMessageObject";
 import ChatInput from "./Input";
-import MessageDisplay from "./Message";
 import Messages from "./Messages";
 
 type ChatWindowProps = {
@@ -30,11 +29,12 @@ const ChatWindow = forwardRef<MessagesRef, ChatWindowProps>((props, ref) => {
 
   return (
     <div id="chatWindow" className="chat-window">
-      <Messages messages={props.messages}
-                sendMessage={props.sendMessage}
-                clientUserUUID={props.clientUserUUID}
-                ref={messagesRef}
-                ></Messages>
+      <Messages
+        messages={props.messages}
+        sendMessage={props.sendMessage}
+        clientUserUUID={props.clientUserUUID}
+        ref={messagesRef}
+      ></Messages>
       <ChatInput onSend={handleSent} ref={chatInputRef}></ChatInput>
     </div>
   );
