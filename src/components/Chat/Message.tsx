@@ -184,7 +184,8 @@ const MessageDisplay = ({
       )}
       {!isEditing && showHover && (
         <div className="hover-div">
-          {(profileUUID == message.userUUID || !import.meta.env.PROD) && (
+          {((profileUUID == message.userUUID && message.messageId != null) ||
+            !import.meta.env.PROD) && (
             <button className="hover-button" onClick={editClicked}>
               Edit
             </button>
