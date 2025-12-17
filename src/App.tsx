@@ -141,12 +141,29 @@ const App = () => {
       });
     };
 
+    const onMessageDeleted = (messageId: number) => {
+      setMessages((prevMessages) => {
+        const messageIndex = prevMessages.findIndex(
+          (event) => event.messageId == messageId
+        );
+        if (messageIndex != -1) {
+          const newMessages = prevMessages.slice();
+          delete newMessages[messageIndex];
+
+          return newMessages;
+        } else {
+          return prevMessages;
+        }
+      });
+    };
+
     if ((!isAuthLoading && session) || !import.meta.env.PROD) {
       socket.on("connect", onConnect);
       socket.on("disconnect", onDisconnect);
       socket.on("client receive message", clientReceiveMessage);
       socket.on("rate limited", onRateLimited);
       socket.on("message edited", onMessageEdited);
+      socket.on("deleted message", onMessageDeleted);
       socket.on("receive recent messages", onRecentMessagesRequestReceived);
       socket.on("receive active users", onActiveUsersRequestReceived);
       socket.on("new active user", onAddActiveUser);
@@ -173,6 +190,7 @@ const App = () => {
       socket.off("client receive message", clientReceiveMessage);
       socket.off("rate limited", onRateLimited);
       socket.off("message edited", onMessageEdited);
+      socket.off("deleted message", onMessageDeleted);
       socket.off("receive recent messages", onRecentMessagesRequestReceived);
       socket.off("receive active users", onActiveUsersRequestReceived);
       socket.off("new active user", onAddActiveUser);
