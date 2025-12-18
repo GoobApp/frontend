@@ -160,6 +160,18 @@
   background-color: var(--primary);
 }
 
+.profile-panel-role {
+  display: inline;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+
+  border-radius: 50px;
+  padding: 5px;
+  background-color: green;
+  border: 1px solid lightgreen;
+}
+
 .login-signup-panel-divider {
   flex-basis: 100%;
 }

@@ -45,6 +45,9 @@ const UserPanel = ({
         src={user.userProfilePicture}
         className="user-panel-profile-picture"
       ></img>
+      {user.userRole && (
+        <span className="user-panel-role">{user.userRole}</span>
+      )}
       {clientUser.userRole == "Owner" && (
         <button className="user-panel-button" onClick={giveRole}>
           Give user role
