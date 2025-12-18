@@ -1,16 +1,27 @@
 import "../../../App.css";
+import { socket } from "../../../socket";
 import UserProfile from "../../../types/UserProfileObject";
 import "./Users.css";
 
 const UserDisplay = ({
   userData,
   isDarkBG,
+  clientUserData,
 }: {
   userData: UserProfile;
   isDarkBG: boolean;
+  clientUserData: UserProfile;
 }) => {
+  const clickedUser = () => {
+    if (clientUserData.userRole == "Owner" || !import.meta.env.PROD)
+    {
+      const role = window.prompt("Role name to give?");
+      socket.emit("give user role", userData.userUUID, role);
+    }
+  }
+
   return (
-    <div className={isDarkBG ? "user-container-dark" : "user-container-light"}>
+    <button className={isDarkBG ? "user-container-dark" : "user-container-light"} onClick={clickedUser}>
       <img
         src={userData.userProfilePicture}
         alt=""
@@ -22,7 +33,7 @@ const UserDisplay = ({
       </p>
 
       {userData.userRole && <span className="role">{userData.userRole}</span>}
-    </div>
+    </button>
   );
 };
 

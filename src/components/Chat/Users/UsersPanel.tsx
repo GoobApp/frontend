@@ -5,9 +5,11 @@ import UserDisplay from "./ActiveUser";
 const ChatUsersPanel = ({
   activeUsers,
   maxUsers,
+  clientUser,
 }: {
   activeUsers: UserProfile[];
   maxUsers: number;
+  clientUser: UserProfile;
 }) => {
   return (
     <div id="chatUsersPanelContainer" className="chat-users-panel-container">
@@ -16,6 +18,7 @@ const ChatUsersPanel = ({
         return (
           <UserDisplay
             userData={value}
+            clientUserData={clientUser}
             isDarkBG={index % 2 == 0}
             key={index}
           ></UserDisplay>

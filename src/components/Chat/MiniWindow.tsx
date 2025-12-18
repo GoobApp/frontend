@@ -4,12 +4,12 @@ import ChatInputRef from "../../types/ChatInputRef";
 import ChatMessageObject from "../../types/ChatMessageObject";
 import ChatInput from "./Input";
 import Messages from "./Messages";
+import UserProfile from "../../types/UserProfileObject";
 
 type ChatWindowProps = {
   messages: ChatMessageObject[];
   sendMessage: (contentText: string) => void;
-  clientUserUUID: string;
-  profileUUID: string;
+  clientProfile: UserProfile;
 };
 
 type MessagesRef = {
@@ -34,7 +34,7 @@ const MiniWindow = forwardRef<MessagesRef, ChatWindowProps>((props, ref) => {
         messages={props.messages}
         sendMessage={props.sendMessage}
         ref={messagesRef}
-        profileUUID={props.profileUUID}
+        clientProfile={props.clientProfile}
       ></Messages>
       <ChatInput onSend={handleSent} ref={chatInputRef}></ChatInput>
     </div>
