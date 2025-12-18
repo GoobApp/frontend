@@ -5,8 +5,8 @@ import cfp_clicked from "../../assets/images/emojis/cfp/clicked.png";
 import goob from "../../assets/images/goofy_goober.png";
 import { socket } from "../../socket";
 import ChatMessage from "../../types/ChatMessageObject";
-import "./Message.css";
 import UserProfile from "../../types/UserProfileObject";
+import "./Message.css";
 
 interface EmojiDict {
   [key: string]: string; // Keys are strings, values are strings
@@ -144,6 +144,8 @@ const MessageDisplay = ({
             src={message.userProfilePicture}
             alt=""
             className="chat-message-profile-picture"
+            referrerPolicy="no-referrer"
+            loading="lazy"
           />
         ) : (
           <div className="chat-message-no-avatar"></div>
@@ -185,8 +187,10 @@ const MessageDisplay = ({
       )}
       {!isEditing && showHover && (
         <div className="hover-div">
-          {((clientProfile.userUUID == message.userUUID && message.messageId != null) ||
-            !import.meta.env.PROD || clientProfile.userRole == "Owner") && (
+          {((clientProfile.userUUID == message.userUUID &&
+            message.messageId != null) ||
+            !import.meta.env.PROD ||
+            clientProfile.userRole == "Owner") && (
             <button className="hover-button" onClick={editClicked}>
               Edit
             </button>
@@ -196,13 +200,14 @@ const MessageDisplay = ({
           </button>
           */}
 
-        {((clientProfile.userUUID == message.userUUID && message.messageId != null) ||
-            !import.meta.env.PROD || clientProfile.userRole == "Owner") && (
-          <button className="hover-button" onClick={deleteClicked}>
-            Delete
-          </button>
-        )}
-
+          {((clientProfile.userUUID == message.userUUID &&
+            message.messageId != null) ||
+            !import.meta.env.PROD ||
+            clientProfile.userRole == "Owner") && (
+            <button className="hover-button" onClick={deleteClicked}>
+              Delete
+            </button>
+          )}
         </div>
       )}
     </div>
