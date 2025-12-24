@@ -23,6 +23,7 @@ body {
   display: grid;
   grid-template-columns: 1fr 5fr 1.5fr;
   grid-template-rows: min-content 15fr min-content;
+
   view-transition-name: wrapper;
 
   width: 100dvw;

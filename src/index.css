@@ -163,13 +163,3 @@ input {
   color: var(--text-color);
   box-shadow: 0px 2px 2px oklch(0 0 0 / 0.2), 0px 4px 4px oklch(0 0 0 / 0.1);
 }
-
-@view-transition {
-  navigation: auto;
-}
-
-::view-transition-group(root),
-::view-transition-old(root),
-::view-transition-new(root) {
-  animation-duration: 0.2s;
-}

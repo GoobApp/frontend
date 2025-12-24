@@ -70,6 +70,8 @@
 }
 
 .profile-panel-div {
+  z-index: 3;
+  view-transition-name: "profile-panel"; /* Apparently this just fixes weird z layering */
   position: absolute;
   right: 0px;
   top: 100%;
