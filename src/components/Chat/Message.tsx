@@ -178,7 +178,7 @@ const MessageDisplay = ({
             : "chat-message-container"
         }
       >
-        {showAvatar ? (
+        {message.userProfilePicture && showAvatar ? (
           <img
             src={message.userProfilePicture}
             alt=""
@@ -189,12 +189,12 @@ const MessageDisplay = ({
         ) : (
           <div className="chat-message-no-avatar"></div>
         )}
-        {showAvatar && (
+        {message.userProfilePicture && showAvatar && (
           <p className="chat-message-display-name">
             {message.userUUID == "0" ? "Deleted user" : message.userDisplayName}
           </p>
         )}
-        {showAvatar && (
+        {message.userProfilePicture && showAvatar && (
           <p className="chat-message-time">
             {message.messageTime.toLocaleString(undefined, {
               dateStyle:

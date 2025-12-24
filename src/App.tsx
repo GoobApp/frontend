@@ -2,7 +2,6 @@ import type { Session } from "@supabase/supabase-js";
 import { useEffect, useState } from "react";
 import { createBrowserRouter, RouterProvider } from "react-router";
 import "./App.css";
-import MiniWindow from "./components/Chat/MiniWindow";
 import ChatWindow from "./components/Chat/Window";
 import Layout from "./components/Layout";
 import ChatLoggedOutWindow from "./components/Pages/ChatLoggedOutWindow";
@@ -231,6 +230,7 @@ const App = () => {
         newUserUUID: "1",
         newUserProfilePicture: null,
         newMessageContent: contentText,
+        newMessageImageURL: null,
         newIsEdited: false,
       });
 
@@ -252,6 +252,7 @@ const App = () => {
         newUserUUID: profile.userUUID,
         newUserProfilePicture: profile.userProfilePicture,
         newMessageContent: contentText,
+        newMessageImageURL: null,
         newIsEdited: false,
       });
 
@@ -361,11 +362,13 @@ const App = () => {
             (isAuthLoading || session == null) && import.meta.env.PROD ? (
               <div className="chat-users-panel-container"></div>
             ) : (
-              <MiniWindow
+              <ChatWindow
                 messages={messages}
                 sendMessage={handleMessageSent}
                 clientProfile={profile}
-              ></MiniWindow>
+                isMini={true}
+                session={session}
+              ></ChatWindow>
             )
           }
         ></Layout>
@@ -381,6 +384,8 @@ const App = () => {
               messages={messages}
               sendMessage={handleMessageSent}
               clientProfile={profile}
+              isMini={false}
+              session={session}
             ></ChatWindow>
           ) : (
             <ChatLoggedOutWindow></ChatLoggedOutWindow>

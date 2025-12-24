@@ -1,15 +1,18 @@
+import { Session } from "@supabase/supabase-js";
 import { forwardRef, useRef } from "react";
 import "../../App.css";
 import ChatInputRef from "../../types/ChatInputRef";
 import ChatMessageObject from "../../types/ChatMessageObject";
+import UserProfile from "../../types/UserProfileObject";
 import ChatInput from "./Input";
 import Messages from "./Messages";
-import UserProfile from "../../types/UserProfileObject";
 
 type ChatWindowProps = {
   messages: ChatMessageObject[];
   sendMessage: (contentText: string) => void;
   clientProfile: UserProfile;
+  isMini: boolean;
+  session: Session | null;
 };
 
 type MessagesRef = {
@@ -29,14 +32,21 @@ const ChatWindow = forwardRef<MessagesRef, ChatWindowProps>((props, ref) => {
   };
 
   return (
-    <div id="chatWindow" className="chat-window">
+    <div
+      id="chatWindow"
+      className={props.isMini ? "chat-mini-window" : "chat-window"}
+    >
       <Messages
         messages={props.messages}
         sendMessage={props.sendMessage}
-        clientProfile={props.clientProfile}
         ref={messagesRef}
+        clientProfile={props.clientProfile}
       ></Messages>
-      <ChatInput onSend={handleSent} ref={chatInputRef}></ChatInput>
+      <ChatInput
+        onSend={handleSent}
+        ref={chatInputRef}
+        session={props.session}
+      ></ChatInput>
     </div>
   );
 });
