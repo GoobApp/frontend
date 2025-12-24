@@ -1,5 +1,5 @@
 import { Session } from "@supabase/supabase-js";
-import { forwardRef, useRef } from "react";
+import { forwardRef, useEffect, useRef } from "react";
 import "../../App.css";
 import ChatInputRef from "../../types/ChatInputRef";
 import ChatMessageObject from "../../types/ChatMessageObject";
@@ -23,6 +23,10 @@ const ChatWindow = forwardRef<MessagesRef, ChatWindowProps>((props, ref) => {
   // Wrap the component with forwardRef so the parent can pass a ref;  useImperativeHandle exposes methods to that ref
   const chatInputRef = useRef<ChatInputRef>(null);
   const messagesRef = useRef<MessagesRef>(null);
+
+  useEffect(() => {
+    messagesRef.current?.scrollToBottom(); // Scroll to bottom when page loads
+  }, []);
 
   const handleSent = () => {
     if (!chatInputRef) return;
