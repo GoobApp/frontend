@@ -33,12 +33,13 @@ const Search = () => {
     if (!value) return;
 
     if (
+      value.includes("http://") ||
       value.includes("https://") ||
       value.includes("www.") ||
       value.includes(".com") ||
       value.includes(".org")
     ) {
-      if (!value.includes("https://")) {
+      if (!value.includes("https://") && !value.includes("http://")) {
         value = "https://" + value;
       }
     } else {
