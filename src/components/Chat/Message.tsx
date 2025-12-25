@@ -52,6 +52,7 @@ const MessageDisplay = ({
               className="chat-message-content-emoji-big"
               src={emojis[emojiName]}
               key={index}
+              loading="lazy"
             ></img>
           );
         }
@@ -61,6 +62,7 @@ const MessageDisplay = ({
             className="chat-message-content-emoji"
             src={emojis[emojiName]}
             key={index}
+            loading="lazy"
           ></img>
         );
       } else {
@@ -71,7 +73,7 @@ const MessageDisplay = ({
               <Link
                 className="chat-message-content-text"
                 key={indexIndex}
-                to={`/extras/search/?q=${itemItem}`}
+                to={`/extras/search?q=${itemItem}`}
                 viewTransition={true}
               >
                 {itemItem}
@@ -94,7 +96,7 @@ const MessageDisplay = ({
             <Link
               className="chat-message-content-text"
               key={indexIndex}
-              to={`/extras/search/?q=${itemItem}`}
+              to={`/extras/search?q=${itemItem}`}
               viewTransition={true}
             >
               {itemItem}
